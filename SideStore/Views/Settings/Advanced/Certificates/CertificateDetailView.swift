@@ -73,7 +73,7 @@ struct CertificateDetailView: View {
                         detailRow(title: "Managed", value: managed ? "Yes (Xcode Cloud)" : "No")
                     }
                     if let status = portalMetadata?.status ?? certificate.status {
-                        detailRow(title: "Status", value: status)
+                        detailRow(title: "状态", value: status)
                     }
                     if let platform = portalMetadata?.platform ?? certificate.platform {
                         detailRow(title: "Platform", value: platform)
@@ -100,20 +100,20 @@ struct CertificateDetailView: View {
                         detailRow(title: "Auto-Rotation", value: autoRotation ? "Enabled" : "Disabled")
                     }
                 } header: {
-                    Text("Developer Portal Info")
+                    Text("开发者门户信息")
                 }
             }
             
             if let certData = certificate.data {
                 let details = parseCertificate(derData: certData)
                 Section {
-                    detailRow(title: "Version", value: details.version)
-                    detailRow(title: "Subject", value: redactableValue(details.subject))
+                    detailRow(title: "版本", value: details.version)
+                    detailRow(title: "主体", value: redactableValue(details.subject))
                     detailRow(title: "Issuer", value: details.issuer)
                     detailRow(title: "Serial Number (hex)", value: details.serialHex)
                     detailRow(title: "Serial Number (dec)", value: details.serialDec)
                 } header: {
-                    Text("X.509 Fields")
+                    Text("X.509 字段")
                 }
                 
                 if let from = details.validFrom, let until = details.validUntil {
@@ -124,7 +124,7 @@ struct CertificateDetailView: View {
                         
                         VStack(alignment: .leading, spacing: 6) {
                             HStack {
-                                Text("Validity Progress")
+                                Text("有效期进度")
                                 Spacer()
                                 Text(String(format: "%.0f%%", stats.progress * 100))
                                     .foregroundColor(.secondary)
@@ -135,7 +135,7 @@ struct CertificateDetailView: View {
                         
                         detailRow(title: "Validity Days", value: "Total: \(stats.totalDays), Elapsed: \(stats.elapsedDays), Remaining: \(stats.remainingDays)")
                     } header: {
-                        Text("Validity Period")
+                        Text("有效期")
                     }
                 }
                 
@@ -145,7 +145,7 @@ struct CertificateDetailView: View {
                     
                     VStack(alignment: .leading, spacing: 4) {
                         HStack {
-                            Text("SHA-1 Fingerprint")
+                            Text("SHA-1 指纹")
                                 .font(.subheadline)
                                 .foregroundColor(.primary)
                             Spacer()
@@ -178,7 +178,7 @@ struct CertificateDetailView: View {
                     
                     VStack(alignment: .leading, spacing: 4) {
                         HStack {
-                            Text("SHA-256 Fingerprint")
+                            Text("SHA-256 指纹")
                                 .font(.subheadline)
                                 .foregroundColor(.primary)
                             Spacer()
@@ -209,7 +209,7 @@ struct CertificateDetailView: View {
                     }
                     .padding(.vertical, 4)
                 } header: {
-                    Text("Signature & Public Key Details")
+                    Text("签名与公钥详情")
                 }
             }
             
@@ -219,7 +219,7 @@ struct CertificateDetailView: View {
                 if let privateKey = signableCert?.privateKey {
                     VStack(alignment: .leading, spacing: 8) {
                         HStack {
-                            Text("Private Key Data")
+                            Text("私钥数据")
                                 .font(.subheadline)
                                 .foregroundColor(.primary)
                             Spacer()
@@ -269,7 +269,7 @@ struct CertificateDetailView: View {
                 if let certData = certificate.data {
                     VStack(alignment: .leading, spacing: 8) {
                         HStack {
-                            Text("Certificate PEM Data")
+                            Text("证书 PEM 数据")
                                 .font(.subheadline)
                                 .foregroundColor(.primary)
                             Spacer()
@@ -303,10 +303,10 @@ struct CertificateDetailView: View {
                     .padding(.vertical, 4)
                 }
             } header: {
-                Text("Cryptographic Keys")
+                Text("加密密钥")
             }
         }
-        .navigationTitle("Certificate Details")
+        .navigationTitle("证书详情")
         #if !os(tvOS)
         .navigationBarTitleDisplayMode(.inline)
         #endif

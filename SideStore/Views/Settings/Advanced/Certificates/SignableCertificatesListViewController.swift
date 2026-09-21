@@ -48,21 +48,21 @@ struct SignableCertificateRowView: View {
                 let certName = cert.name
                 if cert.machineName != nil {
                     (
-                        Text("Name: ").font(.system(size: 10))
+                        Text("名称：").font(.system(size: 10))
                         + Text(certName).font(.system(size: 10))
                     )
                     .foregroundColor(Color(uiColor: .lightGray))
                 }
                 
                 (
-                    Text("Serial: ").font(.system(size: 11))
+                    Text("序列号：").font(.system(size: 11))
                     + Text(cert.serialNumber).font(.system(size: 11, design: .monospaced))
                 )
                 .foregroundColor(Color(uiColor: .lightGray))
                 
                 if let ident = cert.identifier, !ident.isEmpty {
                     (
-                        Text("ID: ").font(.system(size: 10))
+                        Text("ID：").font(.system(size: 10))
                         + Text(ident).font(.system(size: 10, design: .monospaced))
                     )
                     .foregroundColor(Color(uiColor: .lightGray))
@@ -70,13 +70,13 @@ struct SignableCertificateRowView: View {
                 
                 if let brief = briefInfo {
                     (
-                        Text("Type: ").font(.system(size: 10))
+                        Text("类型：").font(.system(size: 10))
                         + Text(brief.type).font(.system(size: 10))
                     )
                     .foregroundColor(Color(uiColor: .lightGray))
                     
                     (
-                        Text("Validity: ").font(.system(size: 10))
+                        Text("有效期：").font(.system(size: 10))
                         + Text("\(brief.validFrom) - \(brief.validUntil)").font(.system(size: 10))
                     )
                     .foregroundColor(Color(uiColor: .lightGray))
@@ -84,21 +84,21 @@ struct SignableCertificateRowView: View {
                 
                 if let req = cert.requesterEmail, !req.isEmpty {
                     (
-                        Text("Requester: ").font(.system(size: 10))
+                        Text("请求方：").font(.system(size: 10))
                         + Text(req).font(.system(size: 10))
                     )
                     .foregroundColor(Color(uiColor: .lightGray))
                 }
                 
                 (
-                    Text("Keys: ").font(.system(size: 10))
-                    + Text("public + private").font(.system(size: 10))
+                    Text("密钥：").font(.system(size: 10))
+                    + Text("公钥 + 私钥").font(.system(size: 10))
                 )
                 .foregroundColor(Color(uiColor: .lightGray))
                 
                 if let status = statusText {
                     (
-                        Text("Status: ").font(.system(size: 10))
+                        Text("状态：").font(.system(size: 10))
                         + Text(status).font(.system(size: 10, weight: .bold))
                     )
                     .foregroundColor(isAppCert ? .green : .cyan)

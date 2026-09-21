@@ -303,7 +303,7 @@ public struct ConsoleLogView: View {
                         viewModel.setSource(.console)
                     }) {
                         HStack {
-                            Text("Console Log")
+                            Text("控制台日志")
                             if viewModel.activeSource == .console {
                                 Image(systemName: "checkmark")
                             }
@@ -314,7 +314,7 @@ public struct ConsoleLogView: View {
                         viewModel.setSource(.widget)
                     }) {
                         HStack {
-                            Text("Widget Log")
+                            Text("小组件日志")
                             if viewModel.activeSource == .widget {
                                 Image(systemName: "checkmark")
                             }
@@ -326,7 +326,7 @@ public struct ConsoleLogView: View {
                             viewModel.setSource(.imported(url: importedURL))
                         }) {
                             HStack {
-                                Text("Imported Log\n(\(importedURL.lastPathComponent))")
+                                Text("导入的日志\n（\(importedURL.lastPathComponent)）")
                                 if case .imported = viewModel.activeSource {
                                     Image(systemName: "checkmark")
                                 }
@@ -340,13 +340,13 @@ public struct ConsoleLogView: View {
                         SwiftUI.Button(action: {
                             showFileImporter = true
                         }) {
-                            Label("Import Log...", systemImage: "square.and.arrow.down")
+                            Label("导入日志...", systemImage: "square.and.arrow.down")
                         }
                     } else {
                         SwiftUI.Button(role: .destructive, action: {
                             viewModel.clearImportedLog()
                         }) {
-                            Label("Remove Imported", systemImage: "xmark.circle")
+                            Label("移除已导入", systemImage: "xmark.circle")
                         }
                     }
                 } label: {
@@ -383,7 +383,7 @@ public struct ConsoleLogView: View {
                       .foregroundColor(.gray)
                       .padding(.trailing, 4)
 
-                   TextField("Search", text: $searchText)
+                   TextField("搜索", text: $searchText)
                        #if !os(tvOS)
                        .textFieldStyle(RoundedBorderTextFieldStyle())
                        #endif
@@ -501,13 +501,13 @@ public struct ConsoleLogView: View {
         }
         #else
         .confirmationDialog("Logs Menu", isPresented: $showTvMenu) {
-            SwiftUI.Button("Console Log") { viewModel.setSource(.console) }
-            SwiftUI.Button("Widget Log") { viewModel.setSource(.widget) }
+            SwiftUI.Button("控制台日志") { viewModel.setSource(.console) }
+            SwiftUI.Button("小组件日志") { viewModel.setSource(.widget) }
             if let importedURL = viewModel.importedURL {
-                SwiftUI.Button("Imported Log (\(importedURL.lastPathComponent))") { viewModel.setSource(.imported(url: importedURL)) }
+                SwiftUI.Button("导入的日志（\(importedURL.lastPathComponent)）") { viewModel.setSource(.imported(url: importedURL)) }
             }
             if viewModel.importedURL == nil {
-                SwiftUI.Button("Import Log...") {
+                SwiftUI.Button("导入日志...") {
                     if let topVC = UIApplication.shared.topViewController() {
                         TVWebFileTransferManager.shared.startImport(acceptedExtensions: ["log", "txt"], title: "Import Log File", presentingVC: topVC) { fileURL in
                             guard let fileURL = fileURL else { return }
@@ -516,15 +516,15 @@ public struct ConsoleLogView: View {
                     }
                 }
             } else {
-                SwiftUI.Button("Remove Imported", role: .destructive) { viewModel.clearImportedLog() }
+                SwiftUI.Button("移除已导入", role: .destructive) { viewModel.clearImportedLog() }
             }
-            SwiftUI.Button("Scroll to Bottom") { scrollToBottom.toggle() }
+            SwiftUI.Button("滚动到底部") { scrollToBottom.toggle() }
         }
         #endif
         .overlay(
             Group {
                 if showCopiedBanner {
-                    Text("Copied Visible Logs to Clipboard")
+                    Text("可见日志已复制到剪贴板")
                         .font(.caption)
                         .padding(.horizontal, 16)
                         .padding(.vertical, 8)

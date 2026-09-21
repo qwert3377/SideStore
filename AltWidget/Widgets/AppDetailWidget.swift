@@ -88,14 +88,14 @@ private struct AppDetailWidgetView: View
                                 let expirationText: Text = {
                                     switch daysRemaining
                                     {
-                                    case ..<0: return Text("Expired")
-                                    case 1: return Text("1 day")
-                                    default: return Text("\(daysRemaining) days")
+                                    case ..<0: return Text("已过期")
+                                    case 1: return Text("1 天")
+                                    default: return Text("\(daysRemaining) 天")
                                     }
                                 }()
                                 
                                 (
-                                    Text("Expires in\n")
+                                    Text("剩余\n")
                                         .font(.system(size: 13, weight: .semibold, design: .rounded))
                                         .foregroundColor(Color.white.opacity(0.45)) +
                                     
@@ -133,11 +133,11 @@ private struct AppDetailWidgetView: View
             else
             {
                 VStack(spacing: 4) {
-                    Text("Open SideStore")
+                    Text("打开 SideStore")
                         .font(.system(.subheadline, design: .rounded))
                         .fontWeight(.semibold)
                         .foregroundColor(Color.white.opacity(0.8))
-                    Text("Launch app to update widget")
+                    Text("打开应用以更新小组件")
                         .font(.system(.caption2, design: .rounded))
                         .foregroundColor(Color.white.opacity(0.5))
                         .multilineTextAlignment(.center)

@@ -19,9 +19,9 @@ struct CacheManagementView: View {
                     .scaleEffect(1.1)
             } else {
                 List {
-                    Section(header: Text("Internal App Cache"), footer: Text("Cached unzipped app bundles stored in SideStore's private container. These are used during automatic background refreshes and resigns.")) {
+                    Section(header: Text("内部应用缓存"), footer: Text("解压后的应用包缓存放于 SideStore 私有容器，用于后台自动刷新和重签。")) {
                         if viewModel.internalApps.isEmpty {
-                            Text("No cached internal apps.")
+                            Text("没有缓存的内部应用。")
                                 .foregroundColor(.secondary)
                                 .italic()
                                 .padding(.vertical, 4)
@@ -42,9 +42,9 @@ struct CacheManagementView: View {
                         }
                     }
                     
-                    Section(header: Text("Exported Resigned Apps"), footer: Text("Copies of signed app bundles exported to your Documents folder. These can be shared or retrieved via the Files app.")) {
+                    Section(header: Text("已导出的重签应用"), footer: Text("导出的已签名应用副本保存在“文件”的 Documents 中，可分享或取回。")) {
                         if viewModel.resignedApps.isEmpty {
-                            Text("No exported resigned apps.")
+                            Text("没有已导出的重签应用。")
                                 .foregroundColor(.secondary)
                                 .italic()
                                 .padding(.vertical, 4)
@@ -85,23 +85,23 @@ struct CacheManagementView: View {
                     .shadow(radius: 10)
             }
         }
-        .navigationTitle("Cache Management")
+        .navigationTitle("缓存管理")
         .onAppear {
             viewModel.loadCacheItems()
         }
         .alert(isPresented: $viewModel.showErrorAlert) {
             Alert(
-                title: Text("Error"),
+                title: Text("错误"),
                 message: Text(viewModel.errorMessage ?? "An unknown error occurred."),
-                dismissButton: .default(Text("OK"))
+                dismissButton: .default(Text("好"))
             )
         }
         .alert(isPresented: $viewModel.showDeleteAlert) {
             let appName = viewModel.itemToDelete?.name ?? "this app"
             return Alert(
-                title: Text("Delete Cached App?"),
-                message: Text("If deleted, SideStore will require the original IPA file during reinstall, backup, resign, or refresh procedures. Are you sure you want to delete the cached app bundle for “\(appName)” ?"),
-                primaryButton: .destructive(Text("Delete")) {
+                title: Text("删除缓存的应用？"),
+                message: Text("删除后，重装、备份、重签或刷新时 SideStore 需要原始 IPA 文件。确定要删除“\(appName)”的缓存应用包吗？"),
+                primaryButton: .destructive(Text("删除")) {
                     if let item = viewModel.itemToDelete {
                         viewModel.deleteItem(item)
                     }
@@ -173,10 +173,10 @@ struct CacheItemRow: View {
         .padding(.vertical, 4)
         .contextMenu {
             SwiftUI.Button(action: onExport) {
-                Label("Export/Share", systemImage: "square.and.arrow.up")
+                Label("导出/分享", systemImage: "square.and.arrow.up")
             }
             SwiftUI.Button(role: .destructive, action: onDelete) {
-                Label("Delete Cache", systemImage: "trash")
+                Label("删除缓存", systemImage: "trash")
             }
         }
     }

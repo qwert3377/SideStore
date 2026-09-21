@@ -94,11 +94,11 @@ struct PairingFileDetailView: View {
         .toolbar {
             ToolbarItemGroup(placement: .navigationBarTrailing) {
                 if isEditing {
-                    SwiftUI.Button("Cancel") {
+                    SwiftUI.Button("取消") {
                         editedContent = rawContent
                         isEditing = false
                     }
-                    SwiftUI.Button("Save") {
+                    SwiftUI.Button("保存") {
                         saveEditedContent()
                     }
                     .font(.system(size: 17, weight: .bold))
@@ -115,15 +115,15 @@ struct PairingFileDetailView: View {
                         }
                         .accessibilityLabel("Copy XML")
 
-                        SwiftUI.Button("Edit") {
+                        SwiftUI.Button("编辑") {
                             requestEnterEditMode()
                         }
                     }
                 }
             }
         }
-        .alert("Invalid Property List", isPresented: $showingInvalidPlistAlert) {
-            SwiftUI.Button("OK", role: .cancel) { }
+        .alert("无效的 plist", isPresented: $showingInvalidPlistAlert) {
+            SwiftUI.Button("好", role: .cancel) { }
         } message: {
             Text(invalidPlistMessage)
         }
@@ -131,7 +131,7 @@ struct PairingFileDetailView: View {
 
     private var fileInfoSection: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Text("FILE INFORMATION")
+            Text("文件信息")
                 .font(.system(size: 13, weight: .semibold))
                 .foregroundColor(Color.white.opacity(0.6))
                 .padding(.horizontal, 4)
@@ -141,7 +141,7 @@ struct PairingFileDetailView: View {
                 divider
                 metadataRow(label: "Protocol Type", value: mode == .rppairing ? "RPPairing (Tunnel)" : "Lockdown")
                 divider
-                metadataRow(label: "Status", value: isInstalled ? "Installed" : "Not Found", valueColor: isInstalled ? .green : .red)
+                metadataRow(label: "状态", value: isInstalled ? "Installed" : "Not Found", valueColor: isInstalled ? .green : .red)
                 if isInstalled {
                     divider
                     metadataRow(label: "File Size", value: ByteCountFormatter.string(fromByteCount: fileSize, countStyle: .file))
@@ -169,7 +169,7 @@ struct PairingFileDetailView: View {
                 Spacer()
                 let displayed = isEditing ? editedContent : rawContent
                 if !displayed.isEmpty {
-                    Text("\(displayed.count) bytes")
+                    Text("\(displayed.count) 字节")
                         .font(.system(size: 12))
                         .foregroundColor(Color.white.opacity(0.4))
                 }
@@ -195,7 +195,7 @@ struct PairingFileDetailView: View {
                 .cornerRadius(12)
                 .frame(minHeight: 300, maxHeight: 500)
             } else {
-                Text("No pairing file installed.")
+                Text("没有安装配对文件。")
                     .font(.system(size: 14))
                     .foregroundColor(Color.white.opacity(0.5))
                     .padding(16)

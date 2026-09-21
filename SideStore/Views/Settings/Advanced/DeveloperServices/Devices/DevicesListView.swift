@@ -52,7 +52,7 @@ struct DevicesListView: View {
 
     var body: some View {
         List {
-            Section(header: Text("Registered Devices (\(viewModel.devices.count))"), footer: Text("Devices registered on your developer team can run development-signed apps. Tap any device to edit its name, disable, or delete it.")) {
+            Section(header: Text("已注册设备（\(viewModel.devices.count)）"), footer: Text("注册到开发者团队的设备可运行开发签名的应用。点按设备可编辑名称、禁用或删除。")) {
                 if filteredDevices.isEmpty {
                     if viewModel.isLoading {
                         HStack {
@@ -79,7 +79,7 @@ struct DevicesListView: View {
                                         .foregroundColor(.primary)
                                     Spacer()
                                     if device.status == "d" {
-                                        Text("Disabled")
+                                        Text("已禁用")
                                             .font(.caption2)
                                             .padding(.horizontal, 6)
                                             .padding(.vertical, 2)
@@ -109,14 +109,14 @@ struct DevicesListView: View {
                             SwiftUI.Button(role: .destructive) {
                                 activeAlert = .delete(device)
                             } label: {
-                                Label("Delete", systemImage: "trash")
+                                Label("删除", systemImage: "trash")
                             }
 
                             if device.status != "d" {
                                 SwiftUI.Button {
                                     activeAlert = .disable(device)
                                 } label: {
-                                    Label("Disable", systemImage: "slash.circle")
+                                    Label("禁用", systemImage: "slash.circle")
                                 }
                                 .tint(.orange)
                             }
@@ -125,7 +125,7 @@ struct DevicesListView: View {
                                 editDeviceName = device.name
                                 deviceToEdit = device
                             } label: {
-                                Label("Edit", systemImage: "pencil")
+                                Label("编辑", systemImage: "pencil")
                             }
                             .tint(.blue)
                         }
@@ -135,26 +135,26 @@ struct DevicesListView: View {
                                 editDeviceName = device.name
                                 deviceToEdit = device
                             } label: {
-                                Label("Edit Name", systemImage: "pencil")
+                                Label("编辑名称", systemImage: "pencil")
                             }
                             #if !os(tvOS)
                             SwiftUI.Button {
                                 UIPasteboard.general.string = device.identifier
                             } label: {
-                                Label("Copy UDID", systemImage: "doc.on.doc")
+                                Label("复制 UDID", systemImage: "doc.on.doc")
                             }
                             #endif
                             if device.status != "d" {
                                 SwiftUI.Button {
                                     activeAlert = .disable(device)
                                 } label: {
-                                    Label("Disable Device", systemImage: "slash.circle")
+                                    Label("禁用设备", systemImage: "slash.circle")
                                 }
                             }
                             SwiftUI.Button(role: .destructive) {
                                 activeAlert = .delete(device)
                             } label: {
-                                Label("Delete Device", systemImage: "trash")
+                                Label("删除设备", systemImage: "trash")
                             }
                         }
                     }
@@ -167,7 +167,7 @@ struct DevicesListView: View {
         #else
         .listStyle(GroupedListStyle())
         #endif
-        .navigationTitle("Devices")
+        .navigationTitle("设备")
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 SwiftUI.Button {
@@ -186,9 +186,9 @@ struct DevicesListView: View {
         .sheet(isPresented: $showRegisterSheet) {
             NavigationView {
                 Form {
-                    Section(header: Text("Device Information"), footer: Text("UDID is a 25-character or 40-character unique device identifier.")) {
-                        TextField("Device Name", text: $newDeviceName)
-                        TextField("Device UDID", text: $newDeviceUDID)
+                    Section(header: Text("设备信息"), footer: Text("UDID 是 25 位或 40 位的唯一设备标识符。")) {
+                        TextField("设备名称", text: $newDeviceName)
+                        TextField("设备 UDID", text: $newDeviceUDID)
                             .autocapitalization(.none)
                             .disableAutocorrection(true)
 
@@ -218,7 +218,7 @@ struct DevicesListView: View {
                         } label: {
                             HStack {
                                 Image(systemName: "pencil")
-                                Text("Fill Current Device Name")
+                                Text("填入当前设备名称")
                             }
                         }
 
@@ -255,18 +255,18 @@ struct DevicesListView: View {
                                 } else {
                                     Image(systemName: "iphone.and.arrow.forward")
                                 }
-                                Text("Fetch Current Device UDID")
+                                Text("获取当前设备 UDID")
                             }
                         }
                         .disabled(isFetchingUDID)
                     }
                 }
-                .navigationTitle("Register Device")
+                .navigationTitle("注册设备")
                 .navigationBarItems(
-                    leading: SwiftUI.Button("Cancel") {
+                    leading: SwiftUI.Button("取消") {
                         showRegisterSheet = false
                     },
-                    trailing: SwiftUI.Button("Register") {
+                    trailing: SwiftUI.Button("注册") {
                         let name = newDeviceName.trimmingCharacters(in: .whitespacesAndNewlines)
                         let udid = newDeviceUDID.trimmingCharacters(in: .whitespacesAndNewlines)
                         guard !name.isEmpty, !udid.isEmpty else { return }
@@ -287,19 +287,19 @@ struct DevicesListView: View {
         .sheet(item: $deviceToEdit) { device in
             NavigationView {
                 Form {
-                    Section(header: Text("Device Name")) {
-                        TextField("Device Name", text: $editDeviceName)
+                    Section(header: Text("设备名称")) {
+                        TextField("设备名称", text: $editDeviceName)
                     }
 
-                    Section(header: Text("Device Identifier (UDID)")) {
+                    Section(header: Text("设备标识符（UDID）")) {
                         Text(device.identifier.isEmpty ? "Not Available" : device.identifier)
                             .font(.system(.subheadline, design: .monospaced))
                             .foregroundColor(.secondary)
                     }
 
-                    Section(header: Text("Device Details")) {
-                        InfoRow(label: "Type", value: device.type.displayName)
-                        InfoRow(label: "Status", value: device.status == "d" ? "Disabled" : "Active", valueColor: device.status == "d" ? .red : .green)
+                    Section(header: Text("设备详情")) {
+                        InfoRow(label: "类型", value: device.type.displayName)
+                        InfoRow(label: "状态", value: device.status == "d" ? "Disabled" : "Active", valueColor: device.status == "d" ? .red : .green)
                         if let devID = device.deviceID, !devID.isEmpty {
                             InfoRow(label: "Portal ID", value: devID)
                         }
@@ -313,7 +313,7 @@ struct DevicesListView: View {
                                 HStack {
                                     Spacer()
                                     Image(systemName: "slash.circle")
-                                    Text("Disable Device")
+                                    Text("禁用设备")
                                         .fontWeight(.semibold)
                                     Spacer()
                                 }
@@ -327,19 +327,19 @@ struct DevicesListView: View {
                             HStack {
                                 Spacer()
                                 Image(systemName: "trash")
-                                Text("Delete Device")
+                                Text("删除设备")
                                     .fontWeight(.semibold)
                                 Spacer()
                             }
                         }
                     }
                 }
-                .navigationTitle("Edit Device")
+                .navigationTitle("编辑设备")
                 .navigationBarItems(
-                    leading: SwiftUI.Button("Cancel") {
+                    leading: SwiftUI.Button("取消") {
                         deviceToEdit = nil
                     },
-                    trailing: SwiftUI.Button("Save") {
+                    trailing: SwiftUI.Button("保存") {
                         let trimmed = editDeviceName.trimmingCharacters(in: .whitespacesAndNewlines)
                         guard !trimmed.isEmpty else { return }
                         Task {
@@ -355,9 +355,9 @@ struct DevicesListView: View {
                 )
                 .alert(isPresented: $showSheetDisableAlert) {
                     Alert(
-                        title: Text("Disable Device?"),
-                        message: Text("Are you sure you want to disable '\(device.name)' on the Apple Developer Portal? Disabled devices will not be included in newly generated provisioning profiles."),
-                        primaryButton: .default(Text("Disable")) {
+                        title: Text("禁用设备？"),
+                        message: Text("确定要在 Apple 开发者门户禁用“\(device.name)”吗？被禁用的设备不会包含在新生成的描述文件中。"),
+                        primaryButton: .default(Text("禁用")) {
                             Task {
                                 let success = await viewModel.disableDevice(device, presentingViewController: presentingViewController)
                                 if success {
@@ -370,9 +370,9 @@ struct DevicesListView: View {
                 }
                 .alert(isPresented: $showSheetDeleteAlert) {
                     Alert(
-                        title: Text("Delete Device?"),
-                        message: Text("Are you sure you want to delete '\(device.name)' (\(device.identifier)) from the Apple Developer Portal?"),
-                        primaryButton: .destructive(Text("Delete")) {
+                        title: Text("删除设备？"),
+                        message: Text("确定要从 Apple 开发者门户删除“\(device.name)”（\(device.identifier)）吗？"),
+                        primaryButton: .destructive(Text("删除")) {
                             Task {
                                 let success = await viewModel.deleteDevice(device, presentingViewController: presentingViewController)
                                 if success {
@@ -389,9 +389,9 @@ struct DevicesListView: View {
             switch alert {
             case .disable(let device):
                 return Alert(
-                    title: Text("Disable Device?"),
-                    message: Text("Are you sure you want to disable '\(device.name)' on the Apple Developer Portal? Disabled devices will not be included in newly generated provisioning profiles."),
-                    primaryButton: .default(Text("Disable")) {
+                    title: Text("禁用设备？"),
+                    message: Text("确定要在 Apple 开发者门户禁用“\(device.name)”吗？被禁用的设备不会包含在新生成的描述文件中。"),
+                    primaryButton: .default(Text("禁用")) {
                         Task {
                             _ = await viewModel.disableDevice(device, presentingViewController: presentingViewController)
                         }
@@ -400,9 +400,9 @@ struct DevicesListView: View {
                 )
             case .delete(let device):
                 return Alert(
-                    title: Text("Delete Device?"),
-                    message: Text("Are you sure you want to delete '\(device.name)' (\(device.identifier)) from the Apple Developer Portal?"),
-                    primaryButton: .destructive(Text("Delete")) {
+                    title: Text("删除设备？"),
+                    message: Text("确定要从 Apple 开发者门户删除“\(device.name)”（\(device.identifier)）吗？"),
+                    primaryButton: .destructive(Text("删除")) {
                         Task {
                             _ = await viewModel.deleteDevice(device, presentingViewController: presentingViewController)
                         }

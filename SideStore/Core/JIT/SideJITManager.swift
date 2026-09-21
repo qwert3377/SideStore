@@ -172,8 +172,8 @@ extension SideJITManager {
             message: "Would you like to enable SideJITServer",
             preferredStyle: .alert
         )
-        alert.addAction(UIAlertAction(title: "OK", style: .default) { _ in UserDefaults.standard.isSideJITServerEnabled = true })
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        alert.addAction(UIAlertAction(title: "好", style: .default) { _ in UserDefaults.standard.isSideJITServerEnabled = true })
+        alert.addAction(UIAlertAction(title: "取消", style: .cancel))
         presentingVC.present(alert, animated: true)
     }
 }

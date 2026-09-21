@@ -67,7 +67,7 @@ struct CreateManualProfileView: View {
                                 ProgressView()
                             }
                         } else {
-                            Text("No App IDs found. Create an App ID first.")
+                            Text("没有找到 App ID，请先创建。")
                                 .foregroundColor(.secondary)
                         }
                     } else {
@@ -100,14 +100,14 @@ struct CreateManualProfileView: View {
                         }
                     }
 
-                    TextField("Profile Name", text: $profileName)
+                    TextField("描述文件名称", text: $profileName)
 
-                    Toggle("Manual Configuration", isOn: $isManualConfiguration.animation())
+                    Toggle("手动配置", isOn: $isManualConfiguration.animation())
                 }
 
                 if isManualConfiguration {
                     Section(header: HStack {
-                        Text("Certificates (\(selectedCertificateIDs.count)/\(viewModel.certificates.count))")
+                        Text("证书（\(selectedCertificateIDs.count)/\(viewModel.certificates.count)）")
                         Spacer()
                         if !viewModel.certificates.isEmpty {
                             SwiftUI.Button(selectedCertificateIDs.count == viewModel.certificates.count ? "Deselect All" : "Select All") {
@@ -119,7 +119,7 @@ struct CreateManualProfileView: View {
                             }
                             .font(.caption)
                         }
-                    }, footer: Text("Select which certificates are permitted to sign applications with this profile.")) {
+                    }, footer: Text("选择允许使用此描述文件签名应用的证书。")) {
                         if viewModel.certificates.isEmpty {
                             if viewModel.isLoading {
                                 HStack {
@@ -128,7 +128,7 @@ struct CreateManualProfileView: View {
                                     Spacer()
                                 }
                             } else {
-                                Text("No certificates found on this team.")
+                                Text("此团队没有找到证书。")
                                     .foregroundColor(.secondary)
                                     .font(.subheadline)
                             }
@@ -147,12 +147,12 @@ struct CreateManualProfileView: View {
                                             Text(cert.commonName ?? cert.name)
                                                 .font(.subheadline)
                                                 .foregroundColor(.primary)
-                                            Text("Serial: \(cert.serialNumber)")
+                                            Text("序列号：\(cert.serialNumber)")
                                                 .font(.caption2)
                                                 .foregroundColor(.secondary)
                                             let hasKey = ProfileManager.shared.hasPrivateKey(for: cert)
                                             HStack(spacing: 4) {
-                                                Text("Type: \(hasKey ? "public + private" : "public only")")
+                                                Text("类型")
                                                     .font(.caption2)
                                                     .foregroundColor(hasKey ? .green : .secondary)
                                                 if hasKey {
@@ -176,7 +176,7 @@ struct CreateManualProfileView: View {
 
                     if selectedProfileType.acceptedDeviceTypes != .none {
                         Section(header: HStack {
-                            Text("Devices (\(selectedDeviceIDs.count)/\(filteredDevices.count))")
+                            Text("设备（\(selectedDeviceIDs.count)/\(filteredDevices.count)）")
                             Spacer()
                             if !filteredDevices.isEmpty {
                                 SwiftUI.Button(selectedDeviceIDs.count == filteredDevices.count ? "Deselect All" : "Select All") {
@@ -188,7 +188,7 @@ struct CreateManualProfileView: View {
                                 }
                                 .font(.caption)
                             }
-                        }, footer: Text("Select registered test devices that can install apps signed with this profile.")) {
+                        }, footer: Text("选择可安装此描述文件签名应用的已注册测试设备。")) {
                             if filteredDevices.isEmpty {
                                 if viewModel.isLoading {
                                     HStack {
@@ -197,7 +197,7 @@ struct CreateManualProfileView: View {
                                         Spacer()
                                     }
                                 } else {
-                                    Text("No registered \(selectedProfileType.displayName) devices found on this team.")
+                                    Text("此团队没有已注册的 \(selectedProfileType.displayName) 设备。")
                                         .foregroundColor(.secondary)
                                         .font(.subheadline)
                                 }
@@ -233,9 +233,9 @@ struct CreateManualProfileView: View {
                     }
                 }
             }
-            .navigationTitle("New Profile")
+            .navigationTitle("新建描述文件")
             .navigationBarItems(
-                leading: SwiftUI.Button("Cancel") {
+                leading: SwiftUI.Button("取消") {
                     presentationMode.wrappedValue.dismiss()
                 },
                 trailing: SwiftUI.Button {
@@ -262,7 +262,7 @@ struct CreateManualProfileView: View {
                     if viewModel.isActionLoading {
                         ProgressView()
                     } else {
-                        Text("Generate")
+                        Text("生成")
                             .bold()
                     }
                 }

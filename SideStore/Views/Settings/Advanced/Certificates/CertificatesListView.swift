@@ -22,11 +22,11 @@ struct CertificatesListView: View {
     
     var body: some View {
         if viewModel.certificates.isEmpty {
-            Section(header: Text("All Certificates")) {
+            Section(header: Text("所有证书")) {
                 if viewModel.isLoading {
-                    Text("Fetching certificates...").foregroundColor(.secondary)
+                    Text("正在获取证书...").foregroundColor(.secondary)
                 } else {
-                    Text("No local certificates found.").foregroundColor(.secondary)
+                    Text("没有找到本地证书。").foregroundColor(.secondary)
                 }
             }
         } else {
@@ -53,14 +53,14 @@ struct CertificatesListView: View {
                                 SwiftUI.Button(role: .destructive) {
                                     onRevoke(cert)
                                 } label: {
-                                    Label("Revoke", systemImage: "xmark.circle")
+                                    Label("吊销", systemImage: "xmark.circle")
                                 }
                             }
                             if viewModel.isCertificateLocallyCached(cert) {
                                 SwiftUI.Button(role: .destructive) {
                                     onDelete(cert)
                                 } label: {
-                                    Label("Delete", systemImage: "trash")
+                                    Label("删除", systemImage: "trash")
                                 }
                             }
                         }
@@ -69,14 +69,14 @@ struct CertificatesListView: View {
                                 SwiftUI.Button {
                                     viewModel.deactivateActiveCertificate()
                                 } label: {
-                                    Label("Deactivate", systemImage: "xmark.seal")
+                                    Label("停用", systemImage: "xmark.seal")
                                 }
                                 .tint(.gray)
                             } else {
                                 SwiftUI.Button {
                                     viewModel.makeCertificateActive(cert)
                                 } label: {
-                                    Label("Activate", systemImage: "checkmark.seal")
+                                    Label("激活", systemImage: "checkmark.seal")
                                 }
                                 .tint(.green)
                             }
@@ -87,7 +87,7 @@ struct CertificatesListView: View {
                     CertGroupHeaderView(group: group, viewModel: viewModel)
                 } footer: {
                     if group.id == viewModel.groupedCertificatesList.last?.id {
-                        Text("Suffix (R) indicates the certificate is registered remotely on Apple's developer portal.")
+                        Text("后缀 (R) 表示该证书已远程注册到 Apple 开发者门户。")
                     }
                 }
             }
@@ -128,7 +128,7 @@ private struct CertGroupHeaderView: View {
                         else { viewModel.currentSort = option; viewModel.isAscending = (option == .name) }
                     } label: {
                         if viewModel.currentSort == option {
-                            Label("\(option.rawValue) \(viewModel.isAscending ? "↑" : "↓")", systemImage: "checkmark")
+                            Label("\(option.rawValue)", systemImage: "checkmark")
                         } else {
                             Text(option.rawValue)
                         }
@@ -138,7 +138,7 @@ private struct CertGroupHeaderView: View {
                 Image(systemName: "arrow.up.arrow.down").font(.system(size: 13)).foregroundColor(.accentColor)
             }
             Menu {
-                Picker("Group By", selection: $viewModel.currentGroup) {
+                Picker("分组方式", selection: $viewModel.currentGroup) {
                     ForEach(GroupOption.allCases) { option in
                         Text(option.rawValue).tag(option)
                     }
@@ -154,7 +154,7 @@ private struct CertGroupHeaderView: View {
             }
             .confirmationDialog("Sort Certificates", isPresented: $showSortDialog) {
                 ForEach(SortOption.allCases) { option in
-                    SwiftUI.Button("\(option.rawValue) \(viewModel.currentSort == option && viewModel.isAscending ? "↑" : "↓")") {
+                    SwiftUI.Button("\(option.rawValue)") {
                         if viewModel.currentSort == option { viewModel.isAscending.toggle() }
                         else { viewModel.currentSort = option; viewModel.isAscending = (option == .name) }
                     }

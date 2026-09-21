@@ -111,7 +111,7 @@ private struct ComplicationView: View
                         Text("-")
                             .font(.system(size: 20.0, weight: .bold, design: .rounded))
                         
-                        Text("DAYS")
+                        Text("天")
                             .font(.caption)
                     }
                     .fixedSize()
@@ -133,7 +133,7 @@ private struct ComplicationView: View
             }
             else if daysRemaining < 0
             {
-                Text("Expired")
+                Text("已过期")
                     .font(.system(size: 10, weight: .bold))
             }
             else

@@ -186,7 +186,7 @@ struct InfoPlistTreeView: View {
         #else
         .listStyle(GroupedListStyle())
         #endif
-        .searchable(text: $searchQuery, prompt: "Search keys")
+        .searchable(text: $searchQuery, prompt: "搜索键")
     }
     
     private func filterNodes(_ nodes: [PlistNode], query: String) -> [PlistNode] {
@@ -231,7 +231,7 @@ struct PlistNodeRow: View {
                     SwiftUI.Button {
                         UIPasteboard.general.string = node.key
                     } label: {
-                        Label("Copy Key", systemImage: "doc.on.doc")
+                        Label("复制密钥", systemImage: "doc.on.doc")
                     }
                 }
             }
@@ -240,7 +240,7 @@ struct PlistNodeRow: View {
         }
         #else
         if let children = node.children {
-            Section(header: Text("\(node.key) (\(node.typeInfo))")) {
+            Section(header: Text("\(node.key)（\(node.typeInfo)）")) {
                 ForEach(children) { child in
                     PlistNodeRow(node: child)
                 }
@@ -589,17 +589,17 @@ struct InfoPlistSemanticView: View {
         List {
             // General Info — only show if app metadata is actually present in plist
             if hasAppMetadata {
-                Section(header: Text("General Info")) {
+                Section(header: Text("基本信息")) {
                     SemanticValueRow(label: "App Name", value: appName)
-                    SemanticValueRow(label: "Bundle Identifier", value: bundleID)
-                    SemanticValueRow(label: "Version", value: version)
+                    SemanticValueRow(label: "Bundle ID", value: bundleID)
+                    SemanticValueRow(label: "版本", value: version)
                     SemanticValueRow(label: "Minimum OS", value: minOS)
                 }
             }
             
             // Privacy Permissions Card
             if !privacyPermissions.isEmpty {
-                Section(header: Text("Privacy Permissions (\(privacyPermissions.count))")) {
+                Section(header: Text("隐私权限（\(privacyPermissions.count)）")) {
                     ForEach(privacyPermissions.keys.sorted(), id: \.self) { key in
                         LocalCopyableDescriptionRow(key: key, value: privacyPermissions[key] ?? "")
                     }
@@ -608,7 +608,7 @@ struct InfoPlistSemanticView: View {
             
             // Custom URL Schemes Card
             if !customURLSchemes.isEmpty {
-                Section(header: Text("Custom URL Schemes")) {
+                Section(header: Text("自定义 URL Scheme")) {
                     ForEach(customURLSchemes, id: \.self) { scheme in
                         LocalCopyableValueOnlyRow(value: scheme)
                     }
@@ -617,7 +617,7 @@ struct InfoPlistSemanticView: View {
             
             // Background Modes Card
             if !backgroundModes.isEmpty {
-                Section(header: Text("Background Modes")) {
+                Section(header: Text("后台模式")) {
                     ForEach(backgroundModes, id: \.self) { mode in
                         HStack {
                             Image(systemName: getBackgroundModeIcon(mode))
@@ -633,7 +633,7 @@ struct InfoPlistSemanticView: View {
             
             // Queried URL Schemes Card
             if !queriedSchemes.isEmpty {
-                Section(header: Text("Queries Schemes")) {
+                Section(header: Text("查询 Scheme")) {
                     ForEach(queriedSchemes, id: \.self) { scheme in
                         HStack {
                             Text(scheme)
@@ -645,7 +645,7 @@ struct InfoPlistSemanticView: View {
             }
             
             // Other Custom/Advanced Keys
-            Section(header: Text("Advanced / Custom Keys")) {
+            Section(header: Text("高级 / 自定义密钥")) {
                 SearchBarView(text: $searchQuery)
                     .listRowInsets(EdgeInsets())
                     .padding(.horizontal)
@@ -704,7 +704,7 @@ struct SemanticValueRow: View {
                 UIPasteboard.general.string = value
                 #endif
             } label: {
-                Label("Copy", systemImage: "doc.on.doc")
+                Label("复制", systemImage: "doc.on.doc")
             }
         }
     }
@@ -732,14 +732,14 @@ struct LocalCopyableDescriptionRow: View {
                 UIPasteboard.general.string = value
                 #endif
             } label: {
-                Label("Copy Value", systemImage: "doc.on.doc")
+                Label("复制值", systemImage: "doc.on.doc")
             }
             SwiftUI.Button {
                 #if !os(tvOS)
                 UIPasteboard.general.string = key
                 #endif
             } label: {
-                Label("Copy Key", systemImage: "doc.on.doc")
+                Label("复制密钥", systemImage: "doc.on.doc")
             }
         }
     }
@@ -761,7 +761,7 @@ struct LocalCopyableValueOnlyRow: View {
                 UIPasteboard.general.string = value
                 #endif
             } label: {
-                Label("Copy", systemImage: "doc.on.doc")
+                Label("复制", systemImage: "doc.on.doc")
             }
         }
     }
@@ -792,14 +792,14 @@ struct CopyableValueRow: View {
                 UIPasteboard.general.string = formatValue(value)
                 #endif
             } label: {
-                Label("Copy Value", systemImage: "doc.on.doc")
+                Label("复制值", systemImage: "doc.on.doc")
             }
             SwiftUI.Button {
                 #if !os(tvOS)
                 UIPasteboard.general.string = key
                 #endif
             } label: {
-                Label("Copy Key", systemImage: "doc.on.doc")
+                Label("复制密钥", systemImage: "doc.on.doc")
             }
         }
     }
@@ -843,7 +843,7 @@ struct SearchBarView: View {
             Image(systemName: "magnifyingglass")
                 .foregroundColor(.secondary)
             
-            TextField("Search keys", text: $text)
+            TextField("搜索键", text: $text)
                 .textFieldStyle(PlainTextFieldStyle())
                 
             if !text.isEmpty {

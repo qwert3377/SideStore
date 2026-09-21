@@ -73,16 +73,16 @@ struct ConnectionConfigView: View {
         ZStack {
             List {
                 Section {
-                    Toggle("Use Local VPN", isOn: $draftUseLocalVPN)
+                    Toggle("使用本地 VPN", isOn: $draftUseLocalVPN)
                 }
 
                 if draftUseLocalVPN {
-                    Section(header: Text("Auto Discovered from network")) {
+                    Section(header: Text("从网络自动发现")) {
                         Group {
                             networkConfigRow(label: "Tunnel IP", text: Binding<String?>(get: { config.formattedTunnelIface }, set: { _ in }), editable: false)
-                            networkConfigRow(label: "Device IP", text: Binding<String?>(get: { config.formattedTunnelPeer }, set: { _ in }), editable: false)
+                            networkConfigRow(label: "设备IP", text: Binding<String?>(get: { config.formattedTunnelPeer }, set: { _ in }), editable: false)
                             if minimuxer.gateway.pairingFileType == .rppairing {
-                                networkConfigRow(label: "RemotePair Port", text: Binding<String?>(get: { String(remotePairingPortCache) }, set: { _ in }), editable: false)
+                                networkConfigRow(label: "配对端口", text: Binding<String?>(get: { String(remotePairingPortCache) }, set: { _ in }), editable: false)
                             }
                             if config.overrideTunnelPeerIp.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
                                 let hasDiscoveredPeer = config.tunnelPeerIp != nil && !config.tunnelPeerIp!.isEmpty
@@ -98,13 +98,13 @@ struct ConnectionConfigView: View {
                     
                     Section {
                         networkConfigRow(
-                            label: "Device IP",
+                            label: "设备IP",
                             text: Binding<String?>(get: { draftOverrideTunnelPeerIp }, set: { draftOverrideTunnelPeerIp = $0 ?? "" }),
                             editable: true
                         )
                         if minimuxer.gateway.pairingFileType == .rppairing {
                             networkConfigRow(
-                                label: "RemotePair Port",
+                                label: "配对端口",
                                 text: Binding<String?>(get: { draftRemotePairingPortOverride }, set: { draftRemotePairingPortOverride = $0 ?? "" }),
                                 editable: true,
                                 isPort: true
@@ -112,30 +112,30 @@ struct ConnectionConfigView: View {
                         }
                         if !config.overrideTunnelPeerIp.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
                             networkConfigRow(
-                                label: "Active",
+                                label: "当前生效",
                                 text: Binding<String?>(get: { config.overrideTunnelPeerActive.rawValue }, set: { _ in }),
                                 editable: false,
                                 textColor: config.overrideTunnelPeerActive == .yes ? .green : .red
                             )
                         }
                     } header: {
-                        Text("User Configuration")
+                        Text("用户配置")
                     } footer: {
                         HStack(alignment: .top, spacing: 0) {
-                            Text("Note: ")
-                            Text("'Device IP' and 'RemotePair Port' are optional and if specified should match exactly as in the target VPN's config or Leave empty to prefer auto-discovery/default port \(String(AppConstants.Minimuxer.remotePairingPort)).")
+                            Text("注：")
+                            Text("“Device IP”和“RemotePair Port”为可选项，若填写需与目标 VPN 配置完全一致；留空则自动发现或使用默认端口 \(String(AppConstants.Minimuxer.remotePairingPort))。")
                         }
                     }
                 } else {
                     Section {
                         networkConfigRow(
-                            label: "Device IP",
+                            label: "设备IP",
                             text: Binding<String?>(get: { draftRemoteServerIp }, set: { draftRemoteServerIp = $0 ?? "" }),
                             editable: true
                         )
                         if minimuxer.gateway.pairingFileType == .rppairing {
                             networkConfigRow(
-                                label: "RemotePair Port",
+                                label: "配对端口",
                                 text: Binding<String?>(get: { draftRemotePairingPortOverride }, set: { draftRemotePairingPortOverride = $0 ?? "" }),
                                 editable: true,
                                 isPort: true
@@ -148,11 +148,11 @@ struct ConnectionConfigView: View {
                             textColor: config.remoteActive == .yes ? .green : .red
                         )
                     } header: {
-                        Text("Remote Endpoint")
+                        Text("远程端点")
                     } footer: {
                         HStack(alignment: .top, spacing: 0) {
-                            Text("Note: ")
-                            Text("'Device IP' is mandatory. 'RemotePair Port' is optional (prefers auto-discovery or default \(String(AppConstants.Minimuxer.remotePairingPort)).")
+                            Text("注：")
+                            Text("“Device IP”为必填。“RemotePair Port”可选，优先自动发现或使用默认端口 \(String(AppConstants.Minimuxer.remotePairingPort))。")
                         }
                     }
                 }
@@ -171,13 +171,13 @@ struct ConnectionConfigView: View {
                             isPort: true
                         )
                     } header: {
-                        Text("WireGuard Server Parameters")
+                        Text("WireGuard 服务器参数")
                     } footer: {
-                        Text("Configures the local UDP loopback host and port bound by EMProxy.")
+                        Text("配置 EMProxy 绑定的本地 UDP 回环主机和端口。")
                     }
                 }
             }
-            .navigationTitle("Connection Config")
+            .navigationTitle("连接配置")
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     SButton("Confirm") {
@@ -197,8 +197,8 @@ struct ConnectionConfigView: View {
                 alwaysShowWireGuardConfig = UserDefaults.standard.alwaysShowWireGuardConfig
                 acceptIPv6ConnectionConfig = UserDefaults.standard.acceptIPv6ConnectionConfig
             }
-            .alert("Invalid Configuration", isPresented: $showValidationErrorAlert) {
-                SwiftUI.Button("OK", role: .cancel) {}
+            .alert("配置无效", isPresented: $showValidationErrorAlert) {
+                SwiftUI.Button("好", role: .cancel) {}
             } message: {
                 Text(validationError ?? "Please check your configuration settings.")
             }
@@ -216,14 +216,14 @@ struct ConnectionConfigView: View {
                     AnimatedCheckmarkView()
                         .padding(.top, 10)
                     
-                    Text("Changes saved")
+                    Text("更改已保存")
                         .font(.system(size: 20, weight: .medium))
                         .foregroundColor(.white)
                     
                     SwiftUI.Button(action: {
                         showConfirmDialog = false
                     }) {
-                        Text("OK")
+                        Text("好")
                             .font(.system(size: 17, weight: .semibold))
                             .foregroundColor(.white)
                             .frame(maxWidth: .infinity)

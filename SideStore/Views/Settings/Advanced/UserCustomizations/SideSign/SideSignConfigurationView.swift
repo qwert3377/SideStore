@@ -181,8 +181,8 @@ struct SideSignConfigurationView: View {
         ScrollView {
             VStack(alignment: .leading, spacing: 24) {
                 Picker("View Mode", selection: $viewModel.viewMode) {
-                    Text("Interactive").tag(0)
-                    Text("Raw JSON").tag(1)
+                    Text("交互式").tag(0)
+                    Text("原始 JSON").tag(1)
                 }
                 .pickerStyle(.segmented)
                 .padding(.horizontal, 16)
@@ -311,7 +311,7 @@ struct SideSignConfigurationView: View {
                     } label: {
                         HStack {
                             Spacer()
-                            Label("Save Overrides", systemImage: "checkmark.circle.fill")
+                            Label("保存覆盖项", systemImage: "checkmark.circle.fill")
                                 .font(.system(size: 17, weight: .bold))
                                 .foregroundColor(.white)
                             Spacer()
@@ -341,7 +341,7 @@ struct SideSignConfigurationView: View {
                             } label: {
                                 HStack {
                                     Spacer()
-                                    Label("Save Raw JSON", systemImage: "square.and.arrow.down.fill")
+                                    Label("保存原始 JSON", systemImage: "square.and.arrow.down.fill")
                                         .font(.system(size: 16, weight: .bold))
                                         .foregroundColor(.white)
                                     Spacer()
@@ -382,7 +382,7 @@ struct SideSignConfigurationView: View {
                             #endif
                         } label: {
                             HStack {
-                                Label("Import Config JSON", systemImage: "square.and.arrow.down")
+                                Label("导入配置 JSON", systemImage: "square.and.arrow.down")
                                     .font(.system(size: 16, weight: .bold))
                                     .foregroundColor(.white)
                                 Spacer()
@@ -404,7 +404,7 @@ struct SideSignConfigurationView: View {
                             }
                         } label: {
                             HStack {
-                                Label("Export Config JSON", systemImage: "square.and.arrow.up")
+                                Label("导出配置 JSON", systemImage: "square.and.arrow.up")
                                     .font(.system(size: 16, weight: .bold))
                                     .foregroundColor(.white)
                                 Spacer()
@@ -422,7 +422,7 @@ struct SideSignConfigurationView: View {
                             showingResetAlert = true
                         } label: {
                             HStack {
-                                Label("Reset to Defaults", systemImage: "arrow.circlepath")
+                                Label("恢复默认", systemImage: "arrow.circlepath")
                                     .font(.system(size: 16, weight: .bold))
                                     .foregroundColor(.red)
                                 Spacer()
@@ -430,15 +430,15 @@ struct SideSignConfigurationView: View {
                             .padding(.horizontal, 16)
                             .frame(height: 50)
                         }
-                        .alert("Reset to Defaults?", isPresented: $showingResetAlert) {
-                            SwiftUI.Button("Reset", role: .destructive) {
+                        .alert("恢复默认？", isPresented: $showingResetAlert) {
+                            SwiftUI.Button("重置", role: .destructive) {
                                 Task {
                                     await viewModel.reset()
                                 }
                             }
-                            SwiftUI.Button("Cancel", role: .cancel) {}
+                            SwiftUI.Button("取消", role: .cancel) {}
                         } message: {
-                            Text("This will restore the SideSign headers to their default recommended values.")
+                            Text("这将把 SideSign 请求头恢复为默认推荐值。")
                         }
                     }
                     .background(Color.settingsRowBackground)
@@ -450,7 +450,7 @@ struct SideSignConfigurationView: View {
             .padding(.bottom, 32)
         }
         .background(Color(uiColor: .settingsBackground).ignoresSafeArea())
-        .navigationTitle("SideSign Config")
+        .navigationTitle("SideSign 配置")
         #if !os(tvOS)
         .navigationBarTitleDisplayMode(.inline)
         #endif

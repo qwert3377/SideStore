@@ -233,7 +233,7 @@
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="jCf-N4-xVD">
-                        <barButtonItem key="leftBarButtonItem" title="Close" id="nDc-Zs-wnK">
+                        <barButtonItem key="leftBarButtonItem" title="关闭" id="nDc-Zs-wnK">
                             <connections>
                                 <action selector="cancel:" destination="yO1-iT-7NP" id="xls-in-Pre"/>
                             </connections>
@@ -400,7 +400,7 @@
                                     <constraint firstAttribute="height" constant="51" id="LQz-qG-ZJK"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="19"/>
-                                <state key="normal" title="Got it">
+                                <state key="normal" title="知道了">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
@@ -420,7 +420,7 @@
                             <constraint firstItem="qZ9-AR-2zK" firstAttribute="leading" secondItem="Otz-hn-WGS" secondAttribute="leadingMargin" id="t2b-3e-6ld"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="How it works" largeTitleDisplayMode="always" id="bCq-Jq-gf1"/>
+                    <navigationItem key="navigationItem" title="工作原理" largeTitleDisplayMode="always" id="bCq-Jq-gf1"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="contentStackView" destination="bp6-55-IG2" id="k0Q-yS-Dxp"/>
@@ -521,7 +521,7 @@
                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="knk-Wf-PKf">
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="描述" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="knk-Wf-PKf">
                                             <rect key="frame" x="30" y="33.5" width="70" height="14.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
@@ -546,7 +546,7 @@
                             <outlet property="delegate" destination="kOD-4P-a6L" id="t9T-jO-TrR"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Select a Team" largeTitleDisplayMode="always" id="qxJ-Go-OPq"/>
+                    <navigationItem key="navigationItem" title="选择团队" largeTitleDisplayMode="always" id="qxJ-Go-OPq"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yH5-jU-aez" userLabel="First Responder" sceneMemberID="firstResponder"/>

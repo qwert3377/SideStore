@@ -52,13 +52,13 @@ struct DeveloperOptionsView: View {
             VStack(alignment: .leading, spacing: 24) {
                 // Section 1: Logging & Diagnostics
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("LOGGING & DIAGNOSTICS")
+                    Text("日志与诊断")
                         .font(.system(size: 13, weight: .semibold))
                         .foregroundColor(Color.white.opacity(0.6))
                         .padding(.horizontal, 16)
                     
                     VStack(spacing: 0) {
-                        toggleRow(title: "Disable URL Response Caching", isOn: Binding(
+                        toggleRow(title: "禁用 URL 响应缓存", isOn: Binding(
                             get: { responseCachingDisabled },
                             set: { newValue in
                                 responseCachingDisabled = newValue
@@ -68,7 +68,7 @@ struct DeveloperOptionsView: View {
                         
                         divider
                         
-                        toggleRow(title: "Rotate Logs on Startup", isOn: Binding(
+                        toggleRow(title: "启动时轮转日志", isOn: Binding(
                             get: { isRotateLogsOnStartupEnabled },
                             set: { newValue in
                                 isRotateLogsOnStartupEnabled = newValue
@@ -82,7 +82,7 @@ struct DeveloperOptionsView: View {
                         
                         divider
                         
-                        toggleRow(title: "SideStore Verbose Logging", isOn: Binding(
+                        toggleRow(title: "SideStore 详细日志", isOn: Binding(
                             get: { isSideStoreVerboseLoggingEnabled },
                             set: { newValue in
                                 isSideStoreVerboseLoggingEnabled = newValue
@@ -94,7 +94,7 @@ struct DeveloperOptionsView: View {
                         divider
                         
                         #if !os(tvOS)
-                        let title = "Widget Verbose Logging"
+                        let title = "Widget 详细日志"
                         #else
                         let title = "Top Shelf Verbose Logging"
                         #endif
@@ -108,7 +108,7 @@ struct DeveloperOptionsView: View {
                         
                         divider
                         
-                        toggleRow(title: "SideSign Verbose Logging", isOn: Binding(
+                        toggleRow(title: "SideSign 详细日志", isOn: Binding(
                             get: { isSideSignVerboseLoggingEnabled },
                             set: { newValue in
                                 isSideSignVerboseLoggingEnabled = newValue
@@ -119,7 +119,7 @@ struct DeveloperOptionsView: View {
                         
                         divider
                         
-                        toggleRow(title: "Minimuxer Verbose Logging", isOn: Binding(
+                        toggleRow(title: "Minimuxer 详细日志", isOn: Binding(
                             get: { isMinimuxerVerboseLoggingEnabled },
                             set: { newValue in
                                 isMinimuxerVerboseLoggingEnabled = newValue
@@ -130,7 +130,7 @@ struct DeveloperOptionsView: View {
                         
                         divider
                         
-                        toggleRow(title: "Operations Verbose Logging", isOn: Binding(
+                        toggleRow(title: "Operations 详细日志", isOn: Binding(
                             get: { isVerboseOperationsLoggingEnabled },
                             set: { newValue in
                                 isVerboseOperationsLoggingEnabled = newValue
@@ -142,7 +142,7 @@ struct DeveloperOptionsView: View {
                         
                         NavigationLink(destination: OperationsLoggingControlView()) {
                             HStack {
-                                Text("Operations Logging Control")
+                                Text("操作日志控制")
                                     .font(.system(size: 17, weight: .bold))
                                     .foregroundColor(.white)
                                 Spacer()
@@ -161,7 +161,7 @@ struct DeveloperOptionsView: View {
                 // Section: Widget Options
                 VStack(alignment: .leading, spacing: 8) {
                     #if !os(tvOS)
-                    let title = "WIDGET OPTIONS"
+                    let title = "小组件选项"
                     #else
                     let title = "TOP SHELF OPTIONS"
                     #endif
@@ -178,7 +178,7 @@ struct DeveloperOptionsView: View {
                                     .foregroundColor(.white)
 
                                 #if !os(tvOS)
-                                let title = "Reload All Widgets"
+                                let title = "重载所有小组件"
                                 #else
                                 let title = "Reload Top Shelf"
                                 #endif
@@ -200,7 +200,7 @@ struct DeveloperOptionsView: View {
                                     .foregroundColor(.white)
                                 
                                 #if !os(tvOS)
-                                let title = "Rotate Widget Log"
+                                let title = "轮转小组件日志"
                                 #else
                                 let title = "Rotate Top Shelf Log"
                                 #endif
@@ -219,7 +219,7 @@ struct DeveloperOptionsView: View {
                 
                 // Section 2: Database Options
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("DATABASE OPTIONS")
+                    Text("数据库选项")
                         .font(.system(size: 13, weight: .semibold))
                         .foregroundColor(Color.white.opacity(0.6))
                         .padding(.horizontal, 16)
@@ -230,7 +230,7 @@ struct DeveloperOptionsView: View {
                                 Image(systemName: "square.and.arrow.up")
                                     .font(.system(size: 18, weight: .semibold))
                                     .foregroundColor(.white)
-                                Text("Export Database")
+                                Text("导出数据库")
                                     .font(.system(size: 17, weight: .bold))
                                     .foregroundColor(.white)
                                 Spacer()
@@ -251,7 +251,7 @@ struct DeveloperOptionsView: View {
                                 Image(systemName: "clock.arrow.circlepath")
                                     .font(.system(size: 18, weight: .semibold))
                                     .foregroundColor(Color(red: 1.0, green: 0.27, blue: 0.27))
-                                Text("Clear Refresh Attempts")
+                                Text("清除刷新记录")
                                     .font(.system(size: 17, weight: .bold))
                                     .foregroundColor(Color(red: 1.0, green: 0.27, blue: 0.27))
                                 Spacer()
@@ -267,7 +267,7 @@ struct DeveloperOptionsView: View {
                                 Image(systemName: "trash")
                                     .font(.system(size: 18, weight: .semibold))
                                     .foregroundColor(Color(red: 1.0, green: 0.27, blue: 0.27))
-                                Text("Delete Database")
+                                Text("删除数据库")
                                     .font(.system(size: 17, weight: .bold))
                                     .foregroundColor(Color(red: 1.0, green: 0.27, blue: 0.27))
                                 Spacer()
@@ -283,7 +283,7 @@ struct DeveloperOptionsView: View {
                                 Image(systemName: "key")
                                     .font(.system(size: 18, weight: .semibold))
                                     .foregroundColor(Color(red: 1.0, green: 0.27, blue: 0.27))
-                                Text("Clear Keychain Items")
+                                Text("清除钥匙串项目")
                                     .font(.system(size: 17, weight: .bold))
                                     .foregroundColor(Color(red: 1.0, green: 0.27, blue: 0.27))
                                 Spacer()
@@ -294,7 +294,7 @@ struct DeveloperOptionsView: View {
                         
                         divider
                         
-                        toggleRow(title: "Wipe Database on Next Start", isOn: Binding(
+                        toggleRow(title: "下次启动时清空数据库", isOn: Binding(
                             get: { recreateDatabaseOnNextStart },
                             set: { newValue in
                                 recreateDatabaseOnNextStart = newValue
@@ -308,7 +308,7 @@ struct DeveloperOptionsView: View {
                 
                 // Section 3: WireGuard Configuration
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("WIREGUARD CONFIGURATION")
+                    Text("WIREGUARD 配置")
                         .font(.system(size: 13, weight: .semibold))
                         .foregroundColor(Color.white.opacity(0.6))
                         .padding(.horizontal, 16)
@@ -319,7 +319,7 @@ struct DeveloperOptionsView: View {
                                 Image(systemName: "play.circle")
                                     .font(.system(size: 18, weight: .semibold))
                                     .foregroundColor(.white)
-                                Text("Start EMProxy")
+                                Text("启动 EMProxy")
                                     .font(.system(size: 17, weight: .bold))
                                     .foregroundColor(.white)
                                 Spacer()
@@ -335,7 +335,7 @@ struct DeveloperOptionsView: View {
                                 Image(systemName: "stop.circle")
                                     .font(.system(size: 18, weight: .semibold))
                                     .foregroundColor(.white)
-                                Text("Stop EMProxy")
+                                Text("停止 EMProxy")
                                     .font(.system(size: 17, weight: .bold))
                                     .foregroundColor(.white)
                                 Spacer()
@@ -359,7 +359,7 @@ struct DeveloperOptionsView: View {
                 }
                 
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("BACKGROUND SERVICE")
+                    Text("后台服务")
                         .font(.system(size: 13, weight: .semibold))
                         .foregroundColor(Color.white.opacity(0.6))
                         .padding(.horizontal, 16)
@@ -370,7 +370,7 @@ struct DeveloperOptionsView: View {
                                 Image(systemName: "play.circle")
                                     .font(.system(size: 18, weight: .semibold))
                                     .foregroundColor(.white)
-                                Text("Start Background Service")
+                                Text("启动后台服务")
                                     .font(.system(size: 17, weight: .bold))
                                     .foregroundColor(.white)
                                 Spacer()
@@ -386,7 +386,7 @@ struct DeveloperOptionsView: View {
                                 Image(systemName: "stop.circle")
                                     .font(.system(size: 18, weight: .semibold))
                                     .foregroundColor(.white)
-                                Text("Stop Background Service")
+                                Text("停止后台服务")
                                     .font(.system(size: 17, weight: .bold))
                                     .foregroundColor(.white)
                                 Spacer()
@@ -401,14 +401,14 @@ struct DeveloperOptionsView: View {
                 
                 // Section: Device (TCP) Probe Timeout
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("DEVICE (TCP) PROBE TIMEOUT")
+                    Text("设备（TCP）探测超时")
                         .font(.system(size: 13, weight: .semibold))
                         .foregroundColor(Color.white.opacity(0.6))
                         .padding(.horizontal, 16)
                     
                     VStack(spacing: 0) {
                         HStack(spacing: 12) {
-                            Text("Timeout (ms)")
+                            Text("超时（毫秒）")
                                 .font(.system(size: 17, weight: .bold))
                                 .foregroundColor(.white)
                             
@@ -444,7 +444,7 @@ struct DeveloperOptionsView: View {
                                 Image(systemName: "arrow.counterclockwise")
                                     .font(.system(size: 18, weight: .semibold))
                                     .foregroundColor(.white)
-                                Text("Use Default (\(AppConstants.Minimuxer.defaultTCPProbeTimeoutMs) ms)")
+                                Text("使用默认（\(AppConstants.Minimuxer.defaultTCPProbeTimeoutMs) 毫秒）")
                                     .font(.system(size: 17, weight: .bold))
                                     .foregroundColor(.white)
                                 Spacer()
@@ -459,13 +459,13 @@ struct DeveloperOptionsView: View {
                 
                 // Section: Connection Config
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("CONNECTION CONFIG")
+                    Text("连接配置")
                         .font(.system(size: 13, weight: .semibold))
                         .foregroundColor(Color.white.opacity(0.6))
                         .padding(.horizontal, 16)
                     
                     VStack(spacing: 0) {
-                        toggleRow(title: "Accept IPv6 Config", isOn: Binding(
+                        toggleRow(title: "接受 IPv6 配置", isOn: Binding(
                             get: { acceptIPv6ConnectionConfig },
                             set: { newValue in
                                 acceptIPv6ConnectionConfig = newValue
@@ -475,7 +475,7 @@ struct DeveloperOptionsView: View {
                         
                         divider
                         
-                        toggleRow(title: "Auto Retry RemotePairing Port", isOn: Binding(
+                        toggleRow(title: "自动重试远程配对端口", isOn: Binding(
                             get: { isAutoRetryRemotePairingPortEnabled },
                             set: { newValue in
                                 isAutoRetryRemotePairingPortEnabled = newValue
@@ -490,7 +490,7 @@ struct DeveloperOptionsView: View {
                 #if DEBUG
                 // Section 3: Account Management
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("ACCOUNT MANAGEMENT")
+                    Text("账号管理")
                         .font(.system(size: 13, weight: .semibold))
                         .foregroundColor(Color.white.opacity(0.6))
                         .padding(.horizontal, 16)
@@ -501,7 +501,7 @@ struct DeveloperOptionsView: View {
                                 Image(systemName: "square.and.arrow.down")
                                     .font(.system(size: 18, weight: .semibold))
                                     .foregroundColor(.white)
-                                Text("Import Account JSON")
+                                Text("导入账号 JSON")
                                     .font(.system(size: 17, weight: .bold))
                                     .foregroundColor(.white)
                                 Spacer()
@@ -529,7 +529,7 @@ struct DeveloperOptionsView: View {
                                 Image(systemName: "square.and.arrow.up")
                                     .font(.system(size: 18, weight: .semibold))
                                     .foregroundColor(.white)
-                                Text("Export Account JSON")
+                                Text("导出账号 JSON")
                                     .font(.system(size: 17, weight: .bold))
                                     .foregroundColor(.white)
                                 Spacer()
@@ -544,7 +544,7 @@ struct DeveloperOptionsView: View {
                 #endif
                 
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("PROVISIONING PROFILES")
+                    Text("描述文件")
                         .font(.system(size: 13, weight: .semibold))
                         .foregroundColor(Color.white.opacity(0.6))
                         .padding(.horizontal, 16)
@@ -559,7 +559,7 @@ struct DeveloperOptionsView: View {
                                 Image(systemName: "arrow.down.doc")
                                     .font(.system(size: 18, weight: .semibold))
                                     .foregroundColor(.white)
-                                Text("Dump Provisioning Profiles")
+                                Text("转储描述文件")
                                     .font(.system(size: 17, weight: .bold))
                                     .foregroundColor(.white)
                                 Spacer()
@@ -578,7 +578,7 @@ struct DeveloperOptionsView: View {
                 }
 
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("ONBOARDING")
+                    Text("新手引导")
                         .font(.system(size: 13, weight: .semibold))
                         .foregroundColor(Color.white.opacity(0.6))
                         .padding(.horizontal, 16)
@@ -589,7 +589,7 @@ struct DeveloperOptionsView: View {
                                 Image(systemName: "sparkles")
                                     .font(.system(size: 18, weight: .semibold))
                                     .foregroundColor(.white)
-                                Text("Replay Onboarding")
+                                Text("重播新手引导")
                                     .font(.system(size: 17, weight: .bold))
                                     .foregroundColor(.white)
                                 Spacer()
@@ -620,7 +620,7 @@ struct DeveloperOptionsView: View {
                                 Image(systemName: "arrow.counterclockwise")
                                     .font(.system(size: 18, weight: .semibold))
                                     .foregroundColor(.white)
-                                Text("Reset Onboarding State")
+                                Text("重置新手引导状态")
                                     .font(.system(size: 17, weight: .bold))
                                     .foregroundColor(.white)
                                 Spacer()
@@ -638,48 +638,48 @@ struct DeveloperOptionsView: View {
             .padding(.bottom, 32)
         }
         .background(Color(uiColor: .settingsBackground).ignoresSafeArea())
-        .navigationTitle("Developer Options")
+        .navigationTitle("开发者选项")
         #if !os(tvOS)
         .navigationBarTitleDisplayMode(.large)
         #endif
-        .alert("Delete Database", isPresented: $showDeleteConfirmation) {
-            SwiftUI.Button("Delete & Exit", role: .destructive) {
+        .alert("删除数据库", isPresented: $showDeleteConfirmation) {
+            SwiftUI.Button("删除并退出", role: .destructive) {
                 _ = DatabaseManager.deleteDatabase()
                 exit(0)
             }
-            SwiftUI.Button("Cancel", role: .cancel) {}
+            SwiftUI.Button("取消", role: .cancel) {}
         } message: {
-            Text("Deleting the database will remove all app entries and sources from SideStore.")
+            Text("删除数据库将移除 SideStore 中所有应用条目和源。")
         }
-        .alert("Clear Refresh Attempts", isPresented: $showClearRefreshAttemptsConfirmation) {
-            SwiftUI.Button("Clear", role: .destructive) {
+        .alert("清除刷新记录", isPresented: $showClearRefreshAttemptsConfirmation) {
+            SwiftUI.Button("清除", role: .destructive) {
                 clearRefreshAttempts()
             }
-            SwiftUI.Button("Cancel", role: .cancel) {}
+            SwiftUI.Button("取消", role: .cancel) {}
         } message: {
-            Text("Are you sure you want to clear all existing refresh attempt entries?")
+            Text("确定要清除所有刷新记录吗？")
         }
         #if DEBUG
-        .alert("Export Account", isPresented: $showExportPasswordPrompt) {
-            SecureField("Certificate Password", text: $exportCertPassword)
-            SwiftUI.Button("Export") {
+        .alert("导出账号", isPresented: $showExportPasswordPrompt) {
+            SecureField("证书密码", text: $exportCertPassword)
+            SwiftUI.Button("导出") {
                 exportAccountJSON(password: exportCertPassword)
             }
-            SwiftUI.Button("Cancel", role: .cancel) {}
+            SwiftUI.Button("取消", role: .cancel) {}
         } message: {
-            Text("Please enter a password for the certificate.")
+            Text("请输入证书密码。")
         }
         #endif
-        .alert("Clear Keychain Items", isPresented: $showClearKeychainConfirmation) {
-            SwiftUI.Button("Clear All", role: .destructive) {
+        .alert("清除钥匙串项目", isPresented: $showClearKeychainConfirmation) {
+            SwiftUI.Button("全部清除", role: .destructive) {
                 Keychain.shared.clearAll()
             }
-            SwiftUI.Button("Cancel", role: .cancel) {}
+            SwiftUI.Button("取消", role: .cancel) {}
         } message: {
-            Text("Do you want to clear all keychain items related to this SideStore instance?")
+            Text("要清除与此 SideStore 实例相关的所有钥匙串项目吗？")
         }
-        .alert("Dump Profiles", isPresented: $showDumpProfilesAlert) {
-            SwiftUI.Button("OK", role: .cancel) {}
+        .alert("转储描述文件", isPresented: $showDumpProfilesAlert) {
+            SwiftUI.Button("好", role: .cancel) {}
         } message: {
             Text(dumpProfilesAlertMessage)
         }
@@ -727,7 +727,7 @@ struct DeveloperOptionsView: View {
         #else
         TVWebFileTransferManager.shared.startImport(
             acceptedExtensions: ["sideconf", "json"],
-            title: "Import Account",
+            title: "导入账号",
             presentingVC: top
         ) { selectedURL in
             guard let url = selectedURL else { return }
@@ -767,7 +767,7 @@ struct DeveloperOptionsView: View {
             let exportVC = UIDocumentPickerViewController(forExporting: [tmpPath], asCopy: false)
             top.present(exportVC, animated: true)
             #else
-            TVWebFileTransferManager.shared.startExport(fileURL: tmpPath, title: "Export Account", presentingVC: top)
+            TVWebFileTransferManager.shared.startExport(fileURL: tmpPath, title: "导出账号", presentingVC: top)
             #endif
         } catch {
             let toastView = ToastView(text: NSLocalizedString("Failed to export account!", comment: ""), detailText: error.localizedDescription)

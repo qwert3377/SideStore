@@ -93,7 +93,7 @@ struct AppPermissionsCard<Permission: AppPermissionProtocol>: View
                         }
                     }
                     
-                    Text("Tap a permission to learn more.")
+                    Text("点按权限可查看详情。")
                         .font(.subheadline)
                         .fixedSize(horizontal: false, vertical: true)
                 }

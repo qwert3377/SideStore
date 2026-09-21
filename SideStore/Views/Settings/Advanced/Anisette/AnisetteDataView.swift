@@ -289,8 +289,8 @@ struct AnisetteDataView: View {
         ScrollView {
             VStack(alignment: .leading, spacing: 24) {
                 Picker("View Mode", selection: $viewModel.viewMode) {
-                    Text("Interactive").tag(0)
-                    Text("Raw JSON").tag(1)
+                    Text("交互式").tag(0)
+                    Text("原始 JSON").tag(1)
                 }
                 .pickerStyle(.segmented)
                 .padding(.horizontal, 16)
@@ -348,7 +348,7 @@ struct AnisetteDataView: View {
                             divider
                             
                             headerFieldRow(
-                                title: "Serial Number",
+                                title: "序列号",
                                 headerKey: "X-Apple-I-SRL-NO",
                                 text: $viewModel.customSerialNumber,
                                 placeholder: AppConstants.Anisette.defaultDeviceSerialNumber
@@ -441,7 +441,7 @@ struct AnisetteDataView: View {
                     } label: {
                         HStack {
                             Spacer()
-                            Label("Save Overrides", systemImage: "checkmark.circle.fill")
+                            Label("保存覆盖项", systemImage: "checkmark.circle.fill")
                                 .font(.system(size: 17, weight: .bold))
                                 .foregroundColor(.white)
                             Spacer()
@@ -472,7 +472,7 @@ struct AnisetteDataView: View {
                             } label: {
                                 HStack {
                                     Spacer()
-                                    Label("Save Raw JSON", systemImage: "square.and.arrow.down.fill")
+                                    Label("保存原始 JSON", systemImage: "square.and.arrow.down.fill")
                                         .font(.system(size: 16, weight: .bold))
                                         .foregroundColor(.white)
                                     Spacer()
@@ -498,7 +498,7 @@ struct AnisetteDataView: View {
                             DisclosureGroup(isExpanded: $showingServerHeaders) {
                                 VStack(alignment: .leading, spacing: 10) {
                                     HStack {
-                                        Text("Server: \(URL(string: UserDefaults.standard.menuAnisetteURL)?.host ?? "Active Server")")
+                                        Text("服务器")
                                             .font(.caption)
                                             .foregroundColor(Color.white.opacity(0.6))
                                         Spacer()
@@ -536,7 +536,7 @@ struct AnisetteDataView: View {
                                     } label: {
                                         HStack {
                                             Spacer()
-                                            Label("Save as Overrides", systemImage: "square.and.arrow.down.on.square")
+                                            Label("保存为覆盖项", systemImage: "square.and.arrow.down.on.square")
                                                 .font(.system(size: 15, weight: .bold))
                                                 .foregroundColor(.white)
                                             Spacer()
@@ -550,7 +550,7 @@ struct AnisetteDataView: View {
                                 .padding(.top, 8)
                             } label: {
                                 HStack {
-                                    Label("Remote Server Sync", systemImage: "network")
+                                    Label("远程服务器同步", systemImage: "network")
                                         .font(.system(size: 16, weight: .bold))
                                         .foregroundColor(.white)
                                     Spacer()
@@ -562,7 +562,7 @@ struct AnisetteDataView: View {
                                     } label: {
                                         HStack(spacing: 4) {
                                             Image(systemName: "arrow.clockwise")
-                                            Text("Fetch")
+                                            Text("获取")
                                         }
                                         .font(.footnote.weight(.semibold))
                                         .foregroundColor(.accentColor)
@@ -606,7 +606,7 @@ struct AnisetteDataView: View {
                             #endif
                         } label: {
                             HStack {
-                                Label("Import Config JSON", systemImage: "square.and.arrow.down")
+                                Label("导入配置 JSON", systemImage: "square.and.arrow.down")
                                     .font(.system(size: 16, weight: .bold))
                                     .foregroundColor(.white)
                                 Spacer()
@@ -628,7 +628,7 @@ struct AnisetteDataView: View {
                             }
                         } label: {
                             HStack {
-                                Label("Export Config JSON", systemImage: "square.and.arrow.up")
+                                Label("导出配置 JSON", systemImage: "square.and.arrow.up")
                                     .font(.system(size: 16, weight: .bold))
                                     .foregroundColor(.white)
                                 Spacer()
@@ -646,7 +646,7 @@ struct AnisetteDataView: View {
                             showingResetAlert = true
                         } label: {
                             HStack {
-                                Label("Reset to Defaults", systemImage: "arrow.circlepath")
+                                Label("恢复默认", systemImage: "arrow.circlepath")
                                     .font(.system(size: 16, weight: .bold))
                                     .foregroundColor(.red)
                                 Spacer()
@@ -654,15 +654,15 @@ struct AnisetteDataView: View {
                             .padding(.horizontal, 16)
                             .frame(height: 50)
                         }
-                        .alert("Reset to Defaults?", isPresented: $showingResetAlert) {
-                            SwiftUI.Button("Reset", role: .destructive) {
+                        .alert("恢复默认？", isPresented: $showingResetAlert) {
+                            SwiftUI.Button("重置", role: .destructive) {
                                 Task {
                                     await viewModel.reset()
                                 }
                             }
-                            SwiftUI.Button("Cancel", role: .cancel) {}
+                            SwiftUI.Button("取消", role: .cancel) {}
                         } message: {
-                            Text("This will restore the client headers to the default recommended values.")
+                            Text("这将把客户端请求头恢复为默认推荐值。")
                         }
                     }
                     .background(Color.settingsRowBackground)
@@ -674,7 +674,7 @@ struct AnisetteDataView: View {
             .padding(.bottom, 32)
         }
         .background(Color(uiColor: .settingsBackground).ignoresSafeArea())
-        .navigationTitle("Client Config")
+        .navigationTitle("客户端配置")
         #if !os(tvOS)
         .navigationBarTitleDisplayMode(.inline)
         #endif

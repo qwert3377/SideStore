@@ -84,7 +84,7 @@ final class CacheResignedMetadataOperation: BasePipelineOperation<InstallAppOper
         try FileManager.default.createDirectory(at: entitlementsDirectory, withIntermediateDirectories: true, attributes: nil)
         
         let validEntitlementIDs = Set(profiles.values.map { $0.bundleIdentifier })
-        cleanupStaleFiles(in: entitlementsDirectory, matchingExtension: "plist", validIDs: validEntitlementIDs, description: "Entitlements")
+        cleanupStaleFiles(in: entitlementsDirectory, matchingExtension: "plist", validIDs: validEntitlementIDs, description: "权限")
         
         for (_, profile) in profiles {
             let resignedID = profile.bundleIdentifier
